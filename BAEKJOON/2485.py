@@ -1,35 +1,23 @@
+import math
+import sys
+input= sys.stdin.readline
 n = int(input())
 l = []
 for i in range(n):
     l.append(int(input()))
+
 l.sort()
-gap = 1000000000
-for i in range(len(l)-1):
-    temp = l[i+1] - l[i]
-    if temp < gap:
-        gap = temp
-while True:
-    l_copy = l.copy()
-    count = 0
-    for i in range(l_copy[0], l_copy[-1]+1, gap):
-        if i in l:
-            l_copy.pop(0)
-            count+=1
-    if len(l_copy) == 0:
-        break
-    gap/=gap
-    gap = int(gap)
+gap = []
+for i in range(n-1):
+    gap.append(l[i+1] - l[i])
+
+gcd = math.gcd(*gap)
+
+count = 0
+for g in gap:
+    count += g // gcd -1 #  gap 안에 들어갈 수 있는 수의 개수를 gap // gcd - 1로 바로 계산.
 print(count)
 
-
-
-# n = int(input())
-# l = []
-# for i in range(n):
-#     l.append(int(input()))
-# l.sort()
-# gap = 1000000000
-# for i in range(len(l)-1):
-#     temp = l[i+1] - l[i]
-#     if temp < gap:
-#         gap = temp
+# for i in range(l[0], l[-1], gcd): 
+#     if i not in l: # in 연산은 리스트에서 O(n) 시간이 걸림 (리스트 탐색).
+#         count+=1
