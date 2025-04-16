@@ -1,10 +1,12 @@
+check = [0] * 2 + [1] * 246912
+
+for i in range(2, 246913):
+    if check[i]:
+        for j in range(i * 2, 246913, i):
+            check[j] = 0
+
 while True:
-    n = int(input())
-    if n == 0:
+    x = int(input())
+    if x == 0:
         break
-    count = 0
-    n2 = 2*n
-    for i in range(n+1, n2+1, 1):
-        if n2%i != 0:
-            count+=1
-    print(count)
+    print(sum(check[x+1:x*2+1]))
