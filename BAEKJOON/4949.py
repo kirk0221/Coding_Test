@@ -28,7 +28,7 @@ while flag:
                 break
         elif word == "(" or word == "[":
             s.append(word)
-    if s and flag2:
+    if s or flag2:
         print("no")
     else:
         print("yes")
