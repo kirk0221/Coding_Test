@@ -1,21 +1,13 @@
 from collections import deque
 n = int(input())
-deck = deque(map(int, input().split()))
-idx = 0
-count = 1
-ans = [0]*n
+l = list(map(int, input().split()))
+deck = deque()
+for i in range(len(l)):
+    deck.append((i,l[i]))
 while(deck):
-    num = deck.popleft()
-    ans[idx] = count
+    idx, num = deck.popleft()
+    print(idx+1, end=' ')
     if num > 0:
-        for i in range(num):
-            deck.append(deck.popleft())
-            idx+=1
+        deck.rotate(-(num-1))
     elif num < 0:
-        for i in range(num, 0, -1):
-            deck.appendleft(deck.pop())
-            idx-=1
-    idx %= n
-    count+=1
-print(ans)
-
+        deck.rotate(-num)
